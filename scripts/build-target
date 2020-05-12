@@ -2,7 +2,7 @@
 set -ex
 
 ros="$1"
-
+echo $(pwd)
 source $(dirname $0)/version
 
 cd $(dirname $0)/..

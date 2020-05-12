@@ -45,7 +45,7 @@ EOF
 rm -f /tmp/dist/success
 
 qemu-img create -f qcow2 ./dist/vmware/vmdk.img 8G
-kvm -curses \
+qemu-system-x86_64 -nographic \
     -drive if=virtio,file=./dist/vmware/vmdk.img \
     -cdrom ./dist/artifacts/rancheros.iso \
     -m 2048 \

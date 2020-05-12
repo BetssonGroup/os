@@ -1,13 +1,13 @@
 #!/bin/bash
-
-if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-    DIRTY="-dirty"
+if [ -z "$COMMIT" ]; then
+    COMMIT=$(git rev-parse --short HEAD)
 fi
 
-COMMIT=$(git rev-parse --short HEAD)
-GIT_TAG=$(git tag -l --contains HEAD | head -n 1)
-
 if [ -z "$VERSION" ]; then
+    if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+        DIRTY="-dirty"
+    fi
+    GIT_TAG=$(git tag -l --contains HEAD | head -n 1)
     if [[ -z "$DIRTY" && -n "$GIT_TAG" ]]; then
         VERSION=$GIT_TAG
     else
